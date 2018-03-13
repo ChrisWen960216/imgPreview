@@ -1,15 +1,28 @@
 
 
 .areaEle{
-  display: inline-block;
   box-sizing: border-box;
-  border: 1px solid yellow;
+  border: 2px dashed #00BDFF;
+  position: absolute;
 }
 
 .active{
-  border: 1px dashed darkcyan;
+  background-color: rgba(0,154,255,.2)
 }
 
 #preview-container{
-  background-color: rgba(249,127,113,.6)
+  position: relative;
+  overflow: hidden;
 }
+
+.container-wapper{
+  max-width: 1000px;
+  max-height: 1000px;
+  min-width: 900px;
+  min-height: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid cadetblue;
+}
+

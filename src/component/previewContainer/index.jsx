@@ -4,37 +4,41 @@
  */
 import React from 'react';
 import '../../public/style/container.less';
-// import connect from 'react-redux';
 
 /** props
  *  1. projectSize --- Container Size
- *  2. arealist --- [{areaId,areaWidth,areaHeight,playItemUrl}]
- *  3. selectedAreaId --- selectedArea highLight
+ *  2. arealist --- [{areaId,areaStyle,playItemUrl}]
+ *  3. areaStyle:{width,height,top,left}
+ *  4. selectedAreaId --- selectedArea highLight
  */
 
 function renderAreaList(areaList, selectedAreaId) {
   const renderList = areaList.map((area) => {
     const {
-      id, width, height, src = '',
+      id, style, src = '',
     } = area;
 
     const className = id === selectedAreaId ? 'active' : '';
-    const style = { width, height };
-    return (<div className={`areaEle ${className}`} key={id} style={style} src={src || ''} alt="" />);
+    return (
+      <div className={`areaEle ${className}`} key={id} style={style}>
+        <img src={src} alt="" />
+      </div>);
   });
   return renderList;
 }
 
 const PreviewContainer = (props) => {
+  /* We have reached an agreement that 65535 is the number can not be touched.
+   * 65535 means null;
+   */
   const { projectSize, areaList, selectedAreaId = 65535 } = props;
-  const style = { width: projectSize.width, height: projectSize.height };
   const areaListEle = renderAreaList(areaList, selectedAreaId);
-  return (<div id="preview-container" style={style}>{areaListEle}</div>);
+  return (
+    <div className="container-wapper">
+      <div id="preview-container" style={projectSize}>{areaListEle}</div>
+    </div>
+  );
 };
 
 
 export default PreviewContainer;
-// function mapStateToProps(state) { }
-// function mapDisptachToProps(dispatch, ownProps) { }
-
-// export default connect(mapStateToProps, mapDisptachToProps)(PreviewContainer);
